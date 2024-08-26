@@ -7,7 +7,7 @@ export function AppHeader() {
     <header className='py-2'>
       <Container className='flex items-center justify-between'>
         <Link to='/' className='flex items-center space-x-2 text-lg font-semibold uppercase'>
-          <span className='py-1 px-2 text-white bg-violet-600 rounded-md'>React</span>
+          <span className='py-1 px-2 text-slate-100 bg-violet-600 rounded-md'>React</span>
           <span>Social</span>
         </Link>
         <div className='-mr-2'>

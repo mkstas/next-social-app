@@ -4,14 +4,11 @@ import { AppHeader } from '@/components/app-header';
 export const Route = createRootRoute({
   component: () => (
     <>
-      {/**
-       * Light theme: bg-white border-slate-200
-       * Dark theme: bg-neutral-800 border-neutral-700
-       */}
       <AppHeader />
       <main>
         <Outlet />
       </main>
     </>
   ),
+  notFoundComponent: () => <p>Not Found 404</p>,
 });
