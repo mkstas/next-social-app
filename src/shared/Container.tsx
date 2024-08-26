@@ -1,11 +1,11 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { clsx } from 'clsx';
 
 type PropsType = {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
 };
 
-export const Container: FC<PropsType> = ({ children, className }) => {
+export function Container({ children, className }: PropsType) {
   return <div className={clsx(['max-w-5xl mx-auto px-2', className])}>{children}</div>;
-};
+}

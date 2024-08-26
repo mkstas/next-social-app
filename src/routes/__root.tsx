@@ -18,7 +18,7 @@ export const Route = createRootRoute({
           <div className='-mr-2'>
             <Link className='flex items-center space-x-1 p-1 hover:text-violet-600' to='/auth'>
               <UserCircleIcon className='w-6 h-6' />
-              <span className='text-sm'>Войти</span>
+              <span className='text-sm font-semibold'>Войти</span>
             </Link>
           </div>
         </Container>
