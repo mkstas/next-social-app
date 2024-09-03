@@ -15,7 +15,7 @@ export function TextField(props: PropsType) {
         </label>
       )}
       <input
-        className='block w-full py-2 px-4 bg-slate-100 outline-none focus-within:ring-1 focus-within:ring-violet-600 dark:bg-neutral-700 rounded-md text-lg placeholder:text-slate-400 dark:placeholder:text-neutral-500'
+        className='block w-full py-2 px-4 bg-slate-100 outline-none focus-within:ring-2 focus-within:ring-violet-600 dark:bg-neutral-700 rounded-md text-lg placeholder:text-slate-400 dark:placeholder:text-neutral-500'
         id={props.id}
         type={props.type}
         placeholder={props.placeholder}

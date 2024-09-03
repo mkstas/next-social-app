@@ -5,7 +5,7 @@ export const Route = createRootRoute({
   component: () => (
     <>
       <AppHeader />
-      <main>
+      <main className='pt-32 pb-8'>
         <Outlet />
       </main>
     </>

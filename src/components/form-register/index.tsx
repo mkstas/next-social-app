@@ -1,13 +1,15 @@
-import { FormEvent } from 'react';
 import { TextField, Button } from '@/shared/ui';
 
-export function FormLogin() {
-  const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
-
+export function FormRegister() {
   return (
-    <form className='mt-4 space-y-4' onSubmit={e => onFormSubmit(e)}>
+    <form className='mt-4 space-y-4'>
+      <TextField
+        id='name'
+        type='text'
+        label='Имя'
+        error='Имя не может быть пустым'
+        placeholder='Иван Иванов'
+      />
       <TextField
         id='email'
         type='email'
