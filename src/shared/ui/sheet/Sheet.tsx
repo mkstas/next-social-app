@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 import { clsx } from 'clsx';
 
-type PropsType = {
+interface IProps {
   children?: ReactNode;
   className?: string;
-};
+}
 
-export function Sheet({ children, className }: PropsType) {
+export function Sheet({ children, className }: IProps) {
   return (
     <div
       className={clsx([

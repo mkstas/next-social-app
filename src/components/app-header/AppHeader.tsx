@@ -11,7 +11,10 @@ export function AppHeader() {
           <span>Social</span>
         </Link>
         <div className='-mr-2'>
-          <Link to='/auth' className='flex items-center space-x-1 p-1 hover:text-violet-600'>
+          <Link
+            to='/auth'
+            className='flex items-center space-x-1 p-1 hover:text-violet-600 dark:hover:text-violet-400 transition-colors'
+          >
             <UserCircleIcon className='w-6 h-6' />
             <span className='text-sm font-semibold'>Войти</span>
           </Link>

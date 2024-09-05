@@ -1,12 +1,12 @@
-type PropsType = {
+interface IProps {
   id: string;
   type: 'text' | 'email' | 'password';
   placeholder?: string;
   label?: string;
   error?: string;
-};
+}
 
-export function TextField(props: PropsType) {
+export function TextField(props: IProps) {
   return (
     <div>
       {props.label && (
