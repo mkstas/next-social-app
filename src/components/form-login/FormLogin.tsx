@@ -1,8 +1,13 @@
 import { TextField, Button } from '@/shared/ui';
+import { clsx } from 'clsx';
 
-export function FormLogin() {
+interface IProps {
+  className?: string;
+}
+
+export function FormLogin({ className }: IProps) {
   return (
-    <form className='mt-4 space-y-4'>
+    <form className={clsx('mt-4 space-y-4', className)}>
       <TextField
         id='email'
         type='email'

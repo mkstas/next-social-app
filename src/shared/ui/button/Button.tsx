@@ -8,16 +8,16 @@ interface IProps {
 }
 
 const variants = {
-  filled: 'text-slate-100 bg-violet-600 hover:bg-violet-700',
+  filled: 'text-slate-100 bg-blue-600 hover:bg-blue-700',
   outline:
-    'text-violet-600 dark:text-violet-400 hover:text-white hover:bg-violet-600 border-2 border-violet-600',
+    'text-blue-600 dark:text-blue-400 hover:text-white hover:bg-blue-600 border-2 border-blue-600',
 };
 
 const Button = ({ className, children, variant = 'filled' }: IProps) => {
   return (
     <button
       className={clsx([
-        'block w-full py-2 px-4 outline-none focus-visible:outline-violet-500 rounded-md transition-colors',
+        'py-2 px-4 outline-none focus-visible:outline-blue-500 rounded-md transition-colors',
         variants[variant],
         className,
       ])}
@@ -36,7 +36,7 @@ Button.Link = ({ className, children, variant = 'filled', to }: IPropsLink) => {
     <Link
       to={to}
       className={clsx([
-        'block w-full py-2 px-4 text-center outline-none focus-visible:outline-violet-500 rounded-md transition-colors',
+        'block w-full py-2 px-4 text-center outline-none focus-visible:outline-blue-500 rounded-md transition-colors',
         variants[variant],
         className,
       ])}

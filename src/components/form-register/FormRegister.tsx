@@ -8,7 +8,7 @@ export function FormRegister() {
         type='text'
         label='Имя'
         error='Имя не может быть пустым'
-        placeholder='Иван Иванов'
+        placeholder='Иван Золо'
       />
       <TextField
         id='email'

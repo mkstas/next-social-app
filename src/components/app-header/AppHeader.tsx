@@ -7,13 +7,13 @@ export function AppHeader() {
     <header className='py-2'>
       <Container className='flex items-center justify-between'>
         <Link to='/' className='flex items-center space-x-2 text-lg font-semibold uppercase'>
-          <span className='py-1 px-2 text-slate-100 bg-violet-600 rounded-md'>React</span>
+          <span className='py-1 px-2 text-slate-100 bg-blue-600 rounded-md'>React</span>
           <span>Social</span>
         </Link>
         <div className='-mr-2'>
           <Link
             to='/auth'
-            className='flex items-center space-x-1 p-1 hover:text-violet-600 dark:hover:text-violet-400 transition-colors'
+            className='flex items-center space-x-1 p-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors'
           >
             <UserCircleIcon className='w-6 h-6' />
             <span className='text-sm font-semibold'>Войти</span>
