@@ -1,25 +1,26 @@
-import { Link } from '@tanstack/react-router';
-import { UserCircleIcon } from '@heroicons/react/24/outline';
-import { Container } from '@/shared/ui';
+import { useState } from 'react';
+import { Container, Sheet } from '@/shared/ui';
+import { AppHeaderLogo } from './app-header-logo';
+import { AppHeaderButton } from './app-header-button';
+import { AppHeaderMenu } from './app-header-menu';
 
-export function AppHeader() {
+export const AppHeader = () => {
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+
+  const onClickButton = () => {
+    setIsOpenMenu(!isOpenMenu);
+  };
+
   return (
-    <header className='py-2'>
-      <Container className='flex items-center justify-between'>
-        <Link to='/' className='flex items-center space-x-2 text-lg font-semibold uppercase'>
-          <span className='py-1 px-2 text-slate-100 bg-blue-600 rounded-md'>React</span>
-          <span>Social</span>
-        </Link>
-        <div className='-mr-2'>
-          <Link
-            to='/auth'
-            className='flex items-center space-x-1 p-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors'
-          >
-            <UserCircleIcon className='w-6 h-6' />
-            <span className='text-sm font-semibold'>Войти</span>
-          </Link>
-        </div>
-      </Container>
+    <header className='fixed top-0 left-0 w-full'>
+      <Sheet bordered='bottom' rounded={false}>
+        <Container classname='flex justify-between items-center relative'>
+          <AppHeaderLogo />
+          <AppHeaderButton onClick={onClickButton} />
+          <AppHeaderMenu />
+          {/* {isOpenMenu && <AppHeaderMenu />} */}
+        </Container>
+      </Sheet>
     </header>
   );
-}
+};

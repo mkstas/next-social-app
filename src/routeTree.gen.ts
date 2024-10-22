@@ -67,11 +67,49 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({
-  IndexLazyRoute,
-  AuthRegisterLazyRoute,
-  AuthIndexLazyRoute,
-})
+export interface FileRoutesByFullPath {
+  '/': typeof IndexLazyRoute
+  '/auth/register': typeof AuthRegisterLazyRoute
+  '/auth': typeof AuthIndexLazyRoute
+}
+
+export interface FileRoutesByTo {
+  '/': typeof IndexLazyRoute
+  '/auth/register': typeof AuthRegisterLazyRoute
+  '/auth': typeof AuthIndexLazyRoute
+}
+
+export interface FileRoutesById {
+  __root__: typeof rootRoute
+  '/': typeof IndexLazyRoute
+  '/auth/register': typeof AuthRegisterLazyRoute
+  '/auth/': typeof AuthIndexLazyRoute
+}
+
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/auth/register' | '/auth'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/auth/register' | '/auth'
+  id: '__root__' | '/' | '/auth/register' | '/auth/'
+  fileRoutesById: FileRoutesById
+}
+
+export interface RootRouteChildren {
+  IndexLazyRoute: typeof IndexLazyRoute
+  AuthRegisterLazyRoute: typeof AuthRegisterLazyRoute
+  AuthIndexLazyRoute: typeof AuthIndexLazyRoute
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexLazyRoute: IndexLazyRoute,
+  AuthRegisterLazyRoute: AuthRegisterLazyRoute,
+  AuthIndexLazyRoute: AuthIndexLazyRoute,
+}
+
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 
