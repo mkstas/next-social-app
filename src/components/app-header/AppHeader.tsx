@@ -17,8 +17,7 @@ export const AppHeader = () => {
         <Container classname='flex justify-between items-center relative'>
           <AppHeaderLogo />
           <AppHeaderButton onClick={onClickButton} />
-          <AppHeaderMenu />
-          {/* {isOpenMenu && <AppHeaderMenu />} */}
+          {isOpenMenu && <AppHeaderMenu />}
         </Container>
       </Sheet>
     </header>
