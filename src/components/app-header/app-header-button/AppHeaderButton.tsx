@@ -2,12 +2,14 @@ import { FC } from 'react';
 import { UserIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 
 interface IProps {
-  onClick?: any;
+  id?: string;
+  onClick?: () => void;
 }
 
-export const AppHeaderButton: FC<IProps> = ({ onClick }) => {
+export const AppHeaderButton: FC<IProps> = ({ id, onClick }) => {
   return (
     <button
+      id={id}
       onClick={onClick}
       className='flex items-center space-x-2 p-2 hover:bg-slate-100 dark:hover:bg-neutral-700'
     >
