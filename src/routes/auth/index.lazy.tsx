@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
-import { createLazyFileRoute, Link } from '@tanstack/react-router';
-import { Button, Sheet, Textfield } from '@/shared/ui';
+import { createLazyFileRoute } from '@tanstack/react-router';
+import { UButton, UForm, UHeading, ULink, USheet, UTextfield } from '@/shared/ui';
 import { ROUTES } from '@/shared/constants';
 
 export const Route = createLazyFileRoute('/auth/')({
@@ -8,35 +8,33 @@ export const Route = createLazyFileRoute('/auth/')({
 });
 
 function AuthIndex() {
-  const onSumbmitForm = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSumbmitForm = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
   };
 
   return (
-    <Sheet className='py-4 px-6'>
-      <h1 className='mb-6 text-xl font-semibold'>Вход</h1>
-      <form onSubmit={onSumbmitForm} className='mb-4'>
-        <div className='space-y-2 mb-4'>
-          <Textfield
-            id='email'
-            type='email'
-            placeholder='example@mail.ru'
-            label='Электронная почта'
-            error='Неверный логин или пароль'
-          />
-          <Textfield
-            id='password'
-            type='password'
-            placeholder='••••••••'
-            label='Пароль'
-            error='Неверный логин или пароль'
-          />
-        </div>
-        <Button>Войти</Button>
-      </form>
-      <Link to={ROUTES.REGISTER} className='text-blue-600 dark:text-blue-400 hover:underline'>
-        Нет аккаунта? Зарегистрироваться
-      </Link>
-    </Sheet>
+    <USheet className='py-4 px-6'>
+      <UHeading className='mb-6'>Вход</UHeading>
+      <UForm onSubmit={onSumbmitForm} className='mb-2'>
+        <UTextfield
+          id='email'
+          type='email'
+          name='email'
+          placeholder='example@mail.ru'
+          label='Электронная почта'
+          error='Неверный логин или пароль'
+        />
+        <UTextfield
+          id='password'
+          type='password'
+          name='password'
+          placeholder='••••••••'
+          label='Пароль'
+          error=''
+        />
+        <UButton>Войти</UButton>
+      </UForm>
+      <ULink to={ROUTES.REGISTER}>Еще нет аккаунта? Зарегистрироваться</ULink>
+    </USheet>
   );
 }

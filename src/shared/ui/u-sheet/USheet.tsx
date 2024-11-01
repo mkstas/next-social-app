@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode, FC } from 'react';
 import { clsx } from 'clsx';
 
 interface IProps {
@@ -8,7 +8,7 @@ interface IProps {
   rounded?: boolean;
 }
 
-export const Sheet: FC<IProps> = ({ children, className, bordered = 'full', rounded = true }) => {
+export const USheet: FC<IProps> = ({ children, className, bordered = 'full', rounded = true }) => {
   return (
     <div
       className={clsx([
