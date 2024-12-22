@@ -18,7 +18,7 @@ export const Route = createRootRoute({
       <>
         <AppHeader />
         <AppMain>
-          <UContainer>
+          <UContainer className='max-sm:px-0'>
             <Outlet />
           </UContainer>
         </AppMain>
