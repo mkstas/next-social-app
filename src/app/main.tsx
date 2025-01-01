@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { Provider as StoreProvider } from 'react-redux';
+import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { store } from '@/store';
 
 import { routeTree } from '../routeTree.gen';
