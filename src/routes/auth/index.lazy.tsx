@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { UButton, ULink, USheet, Input } from '@/shared/ui';
+import { Button, CustomLink, Input, Sheet } from '@/shared/ui';
 import { ROUTES } from '@/shared/constants';
 
 export const Route = createLazyFileRoute('/auth/')({
@@ -22,7 +22,7 @@ function AuthIndex() {
   };
 
   return (
-    <USheet className='sm:max-w-md mx-auto py-4 px-6'>
+    <Sheet className='sm:max-w-md mx-auto py-4 px-6'>
       <h1 className='mb-6 text-xl font-semibold text-center'>Вход</h1>
       <form className='mb-2 space-y-4' onSubmit={handleSubmit(onSubmit)}>
         <Controller
@@ -69,11 +69,11 @@ function AuthIndex() {
             />
           )}
         />
-        <UButton>Войти</UButton>
+        <Button>Войти</Button>
       </form>
-      <ULink to={ROUTES.REGISTER} className='block'>
+      <CustomLink to={ROUTES.REGISTER} className='block'>
         Еще нет аккаунта? Зарегистрироваться
-      </ULink>
-    </USheet>
+      </CustomLink>
+    </Sheet>
   );
 }

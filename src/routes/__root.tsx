@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet, createRootRoute } from '@tanstack/react-router';
-import { UContainer } from '@/shared/ui';
+import { Container } from '@/shared/ui';
 import { AppHeader } from '@/components/app-header';
 import { AppMain } from '@/components/app-main';
 import { useTypedDispatch } from '@/store/hooks';
@@ -18,9 +18,9 @@ export const Route = createRootRoute({
       <>
         <AppHeader />
         <AppMain>
-          <UContainer className='max-sm:px-0'>
+          <Container className='max-sm:px-0'>
             <Outlet />
-          </UContainer>
+          </Container>
         </AppMain>
       </>
     );

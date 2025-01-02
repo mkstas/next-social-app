@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { Input, UButton, ULink, USheet } from '@/shared/ui';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Button, CustomLink, Input, Sheet } from '@/shared/ui';
 import { ROUTES } from '@/shared/constants';
 
 export const Route = createLazyFileRoute('/auth/register')({
@@ -22,7 +22,7 @@ function AuthRegister() {
   };
 
   return (
-    <USheet className='sm:max-w-md mx-auto py-4 px-6'>
+    <Sheet className='sm:max-w-md mx-auto py-4 px-6'>
       <h1 className='mb-6 text-xl font-semibold text-center'>Регистрация</h1>
       <form className='mb-2 space-y-4' onSubmit={handleSubmit(onSubmit)}>
         <Controller
@@ -69,11 +69,11 @@ function AuthRegister() {
             />
           )}
         />
-        <UButton>Зарегистрироваться</UButton>
+        <Button>Зарегистрироваться</Button>
       </form>
-      <ULink to={ROUTES.AUTH} className='block'>
+      <CustomLink to={ROUTES.AUTH} className='block'>
         Уже есть аккаунт? Войти
-      </ULink>
-    </USheet>
+      </CustomLink>
+    </Sheet>
   );
 }

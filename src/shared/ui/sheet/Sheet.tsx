@@ -1,14 +1,14 @@
 import { ReactNode, FC } from 'react';
 import { clsx } from 'clsx';
 
-interface IProps {
+interface Props {
   children?: ReactNode;
   className?: string;
   bordered?: 'full' | 'bottom' | 'top';
   rounded?: boolean;
 }
 
-export const USheet: FC<IProps> = ({ children, className, bordered = 'full', rounded = true }) => {
+export const Sheet: FC<Props> = ({ children, className, bordered = 'full', rounded = true }) => {
   return (
     <div
       className={clsx([
