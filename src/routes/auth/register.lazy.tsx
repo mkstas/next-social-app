@@ -1,5 +1,7 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { Controller, useForm } from 'react-hook-form';
+import { userService, RegisterData } from '@/services';
 import { Button, CustomLink, Input, Sheet } from '@/shared/ui';
 import { ROUTES } from '@/shared/constants';
 
@@ -7,24 +9,20 @@ export const Route = createLazyFileRoute('/auth/register')({
   component: AuthRegister,
 });
 
-interface RegisterForm {
-  email: string;
-  password: string;
-}
-
 function AuthRegister() {
-  const { control, formState, handleSubmit } = useForm<RegisterForm>({
-    mode: 'onChange',
+  const { mutate } = useMutation({
+    mutationKey: ['register'],
+    mutationFn: async (formData: RegisterData) => userService.register(formData),
   });
 
-  const onSubmit: SubmitHandler<RegisterForm> = data => {
-    console.log(data);
-  };
+  const { control, formState, handleSubmit } = useForm<RegisterData>({
+    mode: 'onChange',
+  });
 
   return (
     <Sheet className='sm:max-w-md mx-auto py-4 px-6'>
       <h1 className='mb-6 text-xl font-semibold text-center'>Регистрация</h1>
-      <form className='mb-2 space-y-4' onSubmit={handleSubmit(onSubmit)}>
+      <form className='mb-2 space-y-4' onSubmit={handleSubmit(formData => mutate(formData))}>
         <Controller
           control={control}
           name='email'
@@ -66,6 +64,24 @@ function AuthRegister() {
               placeholder='••••••••'
               id='password'
               type='password'
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name='userName'
+          defaultValue=''
+          rules={{
+            required: 'Это поле обязательно',
+          }}
+          render={({ field }) => (
+            <Input
+              {...field}
+              label='Имя'
+              error={formState.errors.userName?.message}
+              placeholder='Аркадий'
+              id='userName'
+              type='text'
             />
           )}
         />

@@ -2,9 +2,11 @@ import { FC, useEffect, useState } from 'react';
 import { clsx } from 'clsx';
 import { Link } from '@tanstack/react-router';
 import { ChevronDownIcon, SignalIcon, UserIcon } from '@heroicons/react/24/outline';
-import { ButtonLink, Container, Sheet } from '@/shared/ui';
+import { Button, ButtonLink, Container, Sheet } from '@/shared/ui';
 import { ROUTES } from '@/shared/constants';
 import { SchemeToggler } from '@/components/scheme-toggler';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { userService } from '@/services';
 
 export const AppHeader: FC = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -29,6 +31,16 @@ export const AppHeader: FC = () => {
       window.removeEventListener('mousedown', closeMenu);
     }
   }, [isOpenMenu]);
+
+  const profileQuery = useQuery({
+    queryKey: ['profile'],
+    queryFn: userService.getProfile,
+  });
+
+  const logoutMutation = useMutation({
+    mutationKey: ['logout'],
+    mutationFn: userService.logout,
+  });
 
   return (
     <header className='fixed top-0 left-0 w-full'>
@@ -61,14 +73,28 @@ export const AppHeader: FC = () => {
             <Sheet className='p-4 shadow-2xl shadow-slate-900/20 dark:shadow-none'>
               <ul className='space-y-4'>
                 <li className='flex justify-between items-center'>
-                  <span className='font-medium'>Тема</span>
+                  <span className='font-medium text-slate-600 dark:text-neutral-400'>Тема</span>
                   <SchemeToggler />
                 </li>
-                <li>
-                  <ButtonLink to={ROUTES.AUTH} size='sm'>
-                    Войти
-                  </ButtonLink>
-                </li>
+                {profileQuery.data?.data ? (
+                  <>
+                    <li className='flex justify-between'>
+                      <span className='text-slate-600 dark:text-neutral-400'>Имя:</span>
+                      <span>{profileQuery.data.data.userName}</span>
+                    </li>
+                    <li>
+                      <Button onClick={() => logoutMutation.mutate()} size='sm'>
+                        Выйти
+                      </Button>
+                    </li>
+                  </>
+                ) : (
+                  <li>
+                    <ButtonLink to={ROUTES.AUTH} size='sm'>
+                      Войти
+                    </ButtonLink>
+                  </li>
+                )}
               </ul>
             </Sheet>
           </div>

@@ -1,30 +1,33 @@
-import { createLazyFileRoute } from '@tanstack/react-router';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { createLazyFileRoute, redirect } from '@tanstack/react-router';
+import { useMutation } from '@tanstack/react-query';
+import { Controller, useForm } from 'react-hook-form';
+import { AuthData, userService } from '@/services';
 import { Button, CustomLink, Input, Sheet } from '@/shared/ui';
 import { ROUTES } from '@/shared/constants';
+import { useEffect } from 'react';
 
 export const Route = createLazyFileRoute('/auth/')({
   component: AuthIndex,
 });
 
-interface AuthForm {
-  email: string;
-  password: string;
-}
-
 function AuthIndex() {
-  const { control, formState, handleSubmit } = useForm<AuthForm>({
+  const { mutate, isSuccess } = useMutation({
+    mutationKey: ['auth'],
+    mutationFn: async (formData: AuthData) => userService.login(formData),
+  });
+
+  const { control, formState, handleSubmit } = useForm<AuthData>({
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<AuthForm> = data => {
-    console.log(data);
-  };
+  useEffect(() => {
+    userService.getProfile().then(() => redirect({ to: ROUTES.INDEX }));
+  }, [isSuccess]);
 
   return (
     <Sheet className='sm:max-w-md mx-auto py-4 px-6'>
       <h1 className='mb-6 text-xl font-semibold text-center'>Вход</h1>
-      <form className='mb-2 space-y-4' onSubmit={handleSubmit(onSubmit)}>
+      <form className='mb-2 space-y-4' onSubmit={handleSubmit(formData => mutate(formData))}>
         <Controller
           control={control}
           name='email'
