@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 import { clsx } from 'clsx';
 import { Link } from '@tanstack/react-router';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { ChevronDownIcon, SignalIcon, UserIcon } from '@heroicons/react/24/outline';
 import { Button, ButtonLink, Container, Sheet } from '@/shared/ui';
 import { ROUTES } from '@/shared/constants';
+import { authService, profileService } from '@/services';
 import { SchemeToggler } from '@/components/scheme-toggler';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { userService } from '@/services';
 
 export const AppHeader: FC = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -34,12 +34,12 @@ export const AppHeader: FC = () => {
 
   const profileQuery = useQuery({
     queryKey: ['profile'],
-    queryFn: userService.getProfile,
+    queryFn: profileService.find,
   });
 
   const logoutMutation = useMutation({
     mutationKey: ['logout'],
-    mutationFn: userService.logout,
+    mutationFn: authService.logout,
   });
 
   return (

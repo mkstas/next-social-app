@@ -1,1 +1,2 @@
-export * from './user.service';
+export * from './src/auth.service';
+export * from './src/profile.service';

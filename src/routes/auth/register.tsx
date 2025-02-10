@@ -1,18 +1,18 @@
-import { createLazyFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import { useMutation } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
-import { userService, RegisterData } from '@/services';
+import { authService, RegisterData } from '@/services';
 import { Button, CustomLink, Input, Sheet } from '@/shared/ui';
 import { ROUTES } from '@/shared/constants';
 
-export const Route = createLazyFileRoute('/auth/register')({
+export const Route = createFileRoute('/auth/register')({
   component: AuthRegister,
 });
 
 function AuthRegister() {
   const { mutate } = useMutation({
     mutationKey: ['register'],
-    mutationFn: async (formData: RegisterData) => userService.register(formData),
+    mutationFn: async (formData: RegisterData) => authService.register(formData),
   });
 
   const { control, formState, handleSubmit } = useForm<RegisterData>({
