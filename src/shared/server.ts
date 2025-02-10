@@ -15,9 +15,7 @@ export class Server {
           try {
             await this.instance.get('auth/refresh');
             return this.server.request(originalRequest);
-          } catch (error) {
-            console.error(error);
-          }
+          } catch (error) {}
         }
       },
     );

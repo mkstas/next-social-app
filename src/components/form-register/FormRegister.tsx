@@ -2,22 +2,24 @@ import { FC } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from '@tanstack/react-router';
 import { useMutation } from '@tanstack/react-query';
-import { AuthData, authService } from '@/services';
-import { Button, Input } from '@/shared/ui';
+import { RegisterData, authService } from '@/services';
+import { Input, Button } from '@/shared/ui';
 import { ROUTES } from '@/shared/constants';
 
-export const FormLogin: FC = () => {
+export const FormRegister: FC = () => {
   const navigate = useNavigate();
 
   const { mutate } = useMutation({
-    mutationKey: ['login'],
-    mutationFn: async (formData: AuthData) => authService.login(formData),
+    mutationKey: ['register'],
+    mutationFn: async (formData: RegisterData) => authService.register(formData),
     onSuccess: () => {
       navigate({ to: ROUTES.INDEX });
     },
   });
 
-  const { control, formState, handleSubmit } = useForm<AuthData>({ mode: 'onChange' });
+  const { control, formState, handleSubmit } = useForm<RegisterData>({
+    mode: 'onChange',
+  });
 
   return (
     <form className='mb-2 space-y-4' onSubmit={handleSubmit(formData => mutate(formData))}>
@@ -35,11 +37,11 @@ export const FormLogin: FC = () => {
         render={({ field }) => (
           <Input
             {...field}
+            label='Электронная почта'
             error={formState.errors.email?.message}
+            placeholder='example@mail.ru'
             id='email'
             type='text'
-            label='Электронная почта'
-            placeholder='example@mail.ru'
           />
         )}
       />
@@ -57,15 +59,33 @@ export const FormLogin: FC = () => {
         render={({ field }) => (
           <Input
             {...field}
+            label='Пароль'
             error={formState.errors.password?.message}
+            placeholder='••••••••'
             id='password'
             type='password'
-            label='Пароль'
-            placeholder='••••••••'
           />
         )}
       />
-      <Button>Войти</Button>
+      <Controller
+        control={control}
+        name='userName'
+        defaultValue=''
+        rules={{
+          required: 'Это поле обязательно',
+        }}
+        render={({ field }) => (
+          <Input
+            {...field}
+            label='Имя'
+            error={formState.errors.userName?.message}
+            placeholder='Аркадий'
+            id='userName'
+            type='text'
+          />
+        )}
+      />
+      <Button>Зарегистрироваться</Button>
     </form>
   );
 };

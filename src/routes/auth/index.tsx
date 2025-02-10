@@ -1,13 +1,13 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
-import { authService } from '@/services';
 import { CustomLink, Sheet } from '@/shared/ui';
 import { ROUTES } from '@/shared/constants';
+import { authService } from '@/services';
 import { FormLogin } from '@/components/form-login';
 
 export const Route = createFileRoute('/auth/')({
   beforeLoad: async () => {
     const res = await authService.check();
-    if (res.status === 200) {
+    if (res?.status === 200) {
       throw redirect({ to: '/' });
     }
   },

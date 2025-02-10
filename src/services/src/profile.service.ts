@@ -2,7 +2,7 @@ import { Server } from '@/shared/server';
 
 class Profile extends Server {
   async find() {
-    return this.server.get('profiles');
+    return await this.server.get('profiles');
   }
 }
 

@@ -11,19 +11,19 @@ export interface RegisterData extends AuthData {
 
 class Auth extends Server {
   async register(data: RegisterData) {
-    return this.instance.post('auth/register', data);
+    return await this.instance.post('auth/register', data);
   }
 
   async login(data: AuthData) {
-    return this.instance.post('auth/login', data);
+    return await this.instance.post('auth/login', data);
   }
 
   async logout() {
-    return this.server.delete('auth/logout');
+    return await this.server.delete('auth/logout');
   }
 
   async check() {
-    return this.server.get('auth/check');
+    return await this.server.get('auth/check');
   }
 }
 

@@ -1,12 +1,8 @@
 import { FC, useEffect, useState } from 'react';
-import { clsx } from 'clsx';
-import { Link } from '@tanstack/react-router';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { ChevronDownIcon, SignalIcon, UserIcon } from '@heroicons/react/24/outline';
-import { Button, ButtonLink, Container, Sheet } from '@/shared/ui';
-import { ROUTES } from '@/shared/constants';
-import { authService, profileService } from '@/services';
-import { SchemeToggler } from '@/components/scheme-toggler';
+import { Container, Sheet } from '@/shared/ui';
+import { AppHeaderMenu } from './app-header-menu';
+import { AppHeadaerLogo } from './app-header-logo';
+import { AppHeaderButton } from './app-haeder-button';
 
 export const AppHeader: FC = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -32,72 +28,13 @@ export const AppHeader: FC = () => {
     }
   }, [isOpenMenu]);
 
-  const profileQuery = useQuery({
-    queryKey: ['profile'],
-    queryFn: profileService.find,
-  });
-
-  const logoutMutation = useMutation({
-    mutationKey: ['logout'],
-    mutationFn: authService.logout,
-  });
-
   return (
     <header className='fixed top-0 left-0 w-full'>
       <Sheet bordered='bottom' rounded={false}>
         <Container className='relative flex justify-between items-center'>
-          <Link
-            to={ROUTES.INDEX}
-            className='flex items-center space-x-2 outline-none focus-visible:outline-blue-600 rounded-sm'
-          >
-            <SignalIcon className='w-7 h-7 text-blue-600' />
-            <span className='text-xl font-bold'>Social</span>
-          </Link>
-          <button
-            id='header_button'
-            className='flex items-center space-x-2 p-2 hover:bg-slate-100 dark:hover:bg-neutral-700 outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-sm'
-            onClick={onClickButton}
-          >
-            <span className='block p-2 rounded-full bg-slate-200'>
-              <UserIcon className='w-6 h-6 text-slate-600' />
-            </span>
-            <ChevronDownIcon className='w-4 h-4 text-slate-600 dark:text-neutral-400' />
-          </button>
-          <div
-            id='header_menu'
-            className={clsx([
-              'absolute top-20 right-3 w-72 transition-all',
-              isOpenMenu ? '-translate-y-4 visible' : 'opacity-0 invisible',
-            ])}
-          >
-            <Sheet className='p-4 shadow-2xl shadow-slate-900/20 dark:shadow-none'>
-              <ul className='space-y-4'>
-                <li className='flex justify-between items-center'>
-                  <span className='font-medium text-slate-600 dark:text-neutral-400'>Тема</span>
-                  <SchemeToggler />
-                </li>
-                {profileQuery.data?.data ? (
-                  <>
-                    <li className='flex justify-between'>
-                      <span className='text-slate-600 dark:text-neutral-400'>Имя:</span>
-                      <span>{profileQuery.data.data.userName}</span>
-                    </li>
-                    <li>
-                      <Button onClick={() => logoutMutation.mutate()} size='sm'>
-                        Выйти
-                      </Button>
-                    </li>
-                  </>
-                ) : (
-                  <li>
-                    <ButtonLink to={ROUTES.AUTH} size='sm'>
-                      Войти
-                    </ButtonLink>
-                  </li>
-                )}
-              </ul>
-            </Sheet>
-          </div>
+          <AppHeadaerLogo />
+          <AppHeaderButton onClickButton={onClickButton} />
+          <AppHeaderMenu isOpenMenu={isOpenMenu} />
         </Container>
       </Sheet>
     </header>
