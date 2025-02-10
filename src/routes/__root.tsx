@@ -18,7 +18,7 @@ export const Route = createRootRoute({
       <>
         <AppHeader />
         <AppMain>
-          <Container className='max-sm:px-0'>
+          <Container className='max-sm:px-0 grid grid-cols-[2fr_1fr]'>
             <Outlet />
           </Container>
         </AppMain>

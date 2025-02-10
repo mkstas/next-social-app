@@ -29,7 +29,7 @@ export const AppHeader: FC = () => {
   }, [isOpenMenu]);
 
   return (
-    <header className='fixed top-0 left-0 w-full'>
+    <header className='fixed top-0 left-0 w-full z-50'>
       <Sheet bordered='bottom' rounded={false}>
         <Container className='relative flex justify-between items-center'>
           <AppHeadaerLogo />
