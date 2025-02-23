@@ -9,10 +9,9 @@ export const Route = createFileRoute('/auth/')({
     let res = await fetch('http://localhost:5173/api/auth/check');
     if (res.status === 401) {
       res = await fetch('http://localhost:5173/api/auth/refresh');
-      if (res.status === 200) redirect({ to: '/' });
-    } else {
-      redirect({ to: '/' });
+      if (res.status === 200) throw redirect({ to: '/' });
     }
+    throw redirect({ to: '/' });
   },
   component: AuthIndex,
 });

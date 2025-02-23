@@ -22,5 +22,5 @@ const baseQueryRefresh = async (args: string | FetchArgs, api: BaseQueryApi, ext
 export const api = createApi({
   baseQuery: baseQueryRefresh,
   endpoints: () => ({}),
-  tagTypes: ['auth'],
+  tagTypes: ['auth', 'posts'],
 });

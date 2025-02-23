@@ -4,3 +4,4 @@ export * from './container';
 export * from './custom-link';
 export * from './input';
 export * from './sheet';
+export * from './textarea';
