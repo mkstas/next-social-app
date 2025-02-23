@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
-import { useTypedDispatch, useTypedSelector } from '@/store/hooks';
-import { toggleColorScheme } from '@/store/slices';
-import { COLOR_SCHEMES } from '@/shared/constants';
+import { SunIcon, MoonIcon } from '@heroicons/react/24/solid';
+import { COLOR_SCHEMES } from '@/app/constants';
+import { useTypedDispatch, useTypedSelector } from '@/stores';
+import { toggleColorScheme } from '@/stores/slices';
 
 export const SchemeToggler: FC = () => {
   const colorScheme = useTypedSelector(state => state.colorScheme.value);
@@ -22,10 +22,10 @@ export const SchemeToggler: FC = () => {
         onChange={() => dispatch(toggleColorScheme())}
       />
       <div className='relative z-10 flex space-x-3'>
-        <SunIcon className='h-5 w-5 text-yellow-400' />
-        <MoonIcon className='h-5 w-5 text-violet-600' />
+        <SunIcon className='size-5 text-yellow-400' />
+        <MoonIcon className='size-5 text-violet-600' />
       </div>
-      <div className='absolute left-1 peer-checked:left-9 top-1 bg-blue-600 w-7 h-7 rounded-full dark:bg-slate-200 transition-all'></div>
+      <div className='absolute left-1 peer-checked:left-9 top-1 size-7 bg-blue-600 rounded-full dark:bg-slate-200 transition-all'></div>
     </div>
   );
 };

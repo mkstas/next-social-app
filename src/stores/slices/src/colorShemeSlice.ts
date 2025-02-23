@@ -1,4 +1,4 @@
-import { COLOR_SCHEMES } from '@/shared/constants';
+import { COLOR_SCHEMES } from '@/app/constants';
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface ColorSchemeState {

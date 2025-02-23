@@ -12,7 +12,9 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as PostIndexImport } from './routes/post/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
+import { Route as PostCreateImport } from './routes/post/create'
 import { Route as AuthRegisterImport } from './routes/auth/register'
 
 // Create/Update Routes
@@ -22,8 +24,18 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const PostIndexRoute = PostIndexImport.update({
+  path: '/post/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const AuthIndexRoute = AuthIndexImport.update({
   path: '/auth/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PostCreateRoute = PostCreateImport.update({
+  path: '/post/create',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -50,11 +62,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRegisterImport
       parentRoute: typeof rootRoute
     }
+    '/post/create': {
+      id: '/post/create'
+      path: '/post/create'
+      fullPath: '/post/create'
+      preLoaderRoute: typeof PostCreateImport
+      parentRoute: typeof rootRoute
+    }
     '/auth/': {
       id: '/auth/'
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/post/': {
+      id: '/post/'
+      path: '/post'
+      fullPath: '/post'
+      preLoaderRoute: typeof PostIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -65,41 +91,51 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/post/create': typeof PostCreateRoute
   '/auth': typeof AuthIndexRoute
+  '/post': typeof PostIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/post/create': typeof PostCreateRoute
   '/auth': typeof AuthIndexRoute
+  '/post': typeof PostIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/post/create': typeof PostCreateRoute
   '/auth/': typeof AuthIndexRoute
+  '/post/': typeof PostIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth/register' | '/auth'
+  fullPaths: '/' | '/auth/register' | '/post/create' | '/auth' | '/post'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth/register' | '/auth'
-  id: '__root__' | '/' | '/auth/register' | '/auth/'
+  to: '/' | '/auth/register' | '/post/create' | '/auth' | '/post'
+  id: '__root__' | '/' | '/auth/register' | '/post/create' | '/auth/' | '/post/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
+  PostCreateRoute: typeof PostCreateRoute
   AuthIndexRoute: typeof AuthIndexRoute
+  PostIndexRoute: typeof PostIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRegisterRoute: AuthRegisterRoute,
+  PostCreateRoute: PostCreateRoute,
   AuthIndexRoute: AuthIndexRoute,
+  PostIndexRoute: PostIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -116,7 +152,9 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/auth/register",
-        "/auth/"
+        "/post/create",
+        "/auth/",
+        "/post/"
       ]
     },
     "/": {
@@ -125,8 +163,14 @@ export const routeTree = rootRoute
     "/auth/register": {
       "filePath": "auth/register.tsx"
     },
+    "/post/create": {
+      "filePath": "post/create.tsx"
+    },
     "/auth/": {
       "filePath": "auth/index.tsx"
+    },
+    "/post/": {
+      "filePath": "post/index.tsx"
     }
   }
 }

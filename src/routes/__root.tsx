@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
-import { Outlet, createRootRoute } from '@tanstack/react-router';
-import { Container } from '@/shared/ui';
+import { createRootRoute, Outlet } from '@tanstack/react-router';
+import { useTypedDispatch } from '@/stores';
+import { getColorScheme } from '@/stores/slices';
 import { AppHeader } from '@/components/app-header';
 import { AppMain } from '@/components/app-main';
-import { useTypedDispatch } from '@/store/hooks';
-import { getColorScheme } from '@/store/slices';
 
 export const Route = createRootRoute({
   component: () => {
@@ -18,12 +17,10 @@ export const Route = createRootRoute({
       <>
         <AppHeader />
         <AppMain>
-          <Container className='max-sm:px-0 grid grid-cols-[2fr_1fr]'>
-            <Outlet />
-          </Container>
+          <Outlet />
         </AppMain>
       </>
     );
   },
-  notFoundComponent: () => <p>Not Found 404</p>,
+  notFoundComponent: () => <div>Not Found 404</div>,
 });

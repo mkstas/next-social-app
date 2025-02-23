@@ -1,36 +1,21 @@
 import { FC } from 'react';
 import { clsx } from 'clsx';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { Button, ButtonLink, Sheet } from '@/shared/ui';
-import { ROUTES } from '@/shared/constants';
+import { ROUTES } from '@/app/constants';
 import { SchemeToggler } from '@/components/scheme-toggler';
-import { profileService, authService } from '@/services';
+import { useGetProfilesQuery, useLogoutMutation } from '@/stores/queries';
+import { Button, ButtonLink, Sheet } from '@/shared';
 
 interface Props {
   isOpenMenu: boolean;
 }
 
 export const AppHeaderMenu: FC<Props> = ({ isOpenMenu }) => {
-  const { data } = useQuery({
-    queryKey: ['profile'],
-    queryFn: async () => {
-      const res = await profileService.find();
-      if (res.status === 401) return null;
-      return res;
-    },
-  });
-
-  const { mutate } = useMutation({
-    mutationKey: ['logout'],
-    mutationFn: () => authService.logout(),
-    onSuccess: () => {
-      data!.data = null;
-    },
-  });
+  const { data } = useGetProfilesQuery();
+  const [logout, {}] = useLogoutMutation();
 
   return (
     <div
-      id='header_menu'
+      id='headerMenu'
       className={clsx([
         'absolute top-20 right-3 w-72 transition-all',
         isOpenMenu ? '-translate-y-4 visible' : 'opacity-0 invisible',
@@ -42,14 +27,14 @@ export const AppHeaderMenu: FC<Props> = ({ isOpenMenu }) => {
             <span className='font-medium text-slate-600 dark:text-neutral-400'>Тема</span>
             <SchemeToggler />
           </li>
-          {data?.data ? (
+          {data ? (
             <>
-              <li className='flex justify-between'>
+              <li className='flex justify-between items-center'>
                 <span className='text-slate-600 dark:text-neutral-400'>Имя:</span>
-                <span>{data.data.userName}</span>
+                <span className='transition-none'>{data.userName}</span>
               </li>
               <li>
-                <Button onClick={() => mutate()} size='sm'>
+                <Button scale='sm' onClick={() => logout()}>
                   Выйти
                 </Button>
               </li>

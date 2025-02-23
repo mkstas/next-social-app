@@ -1,9 +1,12 @@
-import { FC, ReactNode } from 'react';
+import { FC, PropsWithChildren } from 'react';
+import { Container } from '@/shared';
 
-interface Props {
-  children?: ReactNode;
-}
+interface Props extends PropsWithChildren {}
 
 export const AppMain: FC<Props> = ({ children }) => {
-  return <main className='pt-24 pb-8'>{children}</main>;
+  return (
+    <main className='pt-24 pb-8'>
+      <Container>{children}</Container>
+    </main>
+  );
 };

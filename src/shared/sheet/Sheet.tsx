@@ -1,14 +1,12 @@
-import { ReactNode, FC } from 'react';
+import { FC, HTMLProps, PropsWithChildren } from 'react';
 import { clsx } from 'clsx';
 
-interface Props {
-  children?: ReactNode;
-  className?: string;
-  bordered?: 'full' | 'bottom' | 'top';
+interface Props extends HTMLProps<HTMLElement>, PropsWithChildren {
   rounded?: boolean;
+  bordered?: 'full' | 'bottom' | 'top';
 }
 
-export const Sheet: FC<Props> = ({ children, className, bordered = 'full', rounded = true }) => {
+export const Sheet: FC<Props> = ({ children, className, rounded = true, bordered = 'full' }) => {
   return (
     <div
       className={clsx([
