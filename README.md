@@ -1,1 +1,1 @@
-# React Social
+Next Social Client
