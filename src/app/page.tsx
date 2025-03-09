@@ -1,3 +1,3 @@
 export default function Root() {
-  return <div>Hello Next!</div>;
+  return <section>Root</section>;
 }
