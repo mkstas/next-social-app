@@ -3,22 +3,22 @@
 import { FC, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { redirect } from 'next/navigation';
-import { UiTextField, UiButton } from '@/shared/ui';
+import { UiTextField, UiButton, UiForm } from '@/shared/ui';
 import { RegisterData, useRegisterMutation } from '@/shared/stores/queries';
-import { ROUTES } from '@/shared/routes';
+import { ROUTES } from '@/shared/utils/constants';
 
 export const RegisterUserForm: FC = () => {
   const { control, formState, handleSubmit } = useForm<RegisterData>({ mode: 'onChange' });
-  const [register, { isSuccess }] = useRegisterMutation();
+  const [register, { isSuccess: isSuccessRegister }] = useRegisterMutation();
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccessRegister) {
       redirect(ROUTES.INDEX);
     }
-  }, [isSuccess]);
+  }, [isSuccessRegister]);
 
   return (
-    <form onSubmit={handleSubmit(formData => register(formData))} className='grid gap-3'>
+    <UiForm onSubmit={handleSubmit(formData => register(formData))}>
       <Controller
         control={control}
         name='userName'
@@ -82,6 +82,6 @@ export const RegisterUserForm: FC = () => {
         )}
       />
       <UiButton>Зарегистрироваться</UiButton>
-    </form>
+    </UiForm>
   );
 };

@@ -2,8 +2,8 @@ import { PropsWithChildren } from 'react';
 import { Metadata } from 'next';
 import { Onest } from 'next/font/google';
 import { UiContainer } from '@/shared/ui';
+import { Providers } from '@/shared/utils/providers';
 import { TheHeader } from '@/widgets/the-header';
-import { Providers } from './Providers';
 import './styles.css';
 
 const onest = Onest({

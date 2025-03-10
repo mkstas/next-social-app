@@ -1,4 +1,4 @@
-import { HTMLProps, forwardRef } from 'react';
+import { forwardRef, HTMLProps } from 'react';
 
 interface Props extends HTMLProps<HTMLInputElement> {
   label?: string;
@@ -6,20 +6,18 @@ interface Props extends HTMLProps<HTMLInputElement> {
 }
 
 const UiTextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { label, error, ...inputProps } = props;
+  const { label, error, ...updatedProps } = props;
+  const classes =
+    'py-2 px-4 bg-white border-2 border-slate-200 focus:border-2 focus:border-blue-600 rounded-2xl placeholder:text-slate-400 outline-none';
 
   return (
     <div className='grid'>
       {label && (
-        <label htmlFor={inputProps.id} className='pb-1 font-medium'>
+        <label htmlFor={updatedProps.id} className='pb-1 font-medium'>
           {label}
         </label>
       )}
-      <input
-        ref={ref}
-        {...inputProps}
-        className='py-2 px-4 bg-white border-2 border-slate-200 rounded-full placeholder:text-slate-400 outline-none focus:border-2 focus:border-blue-500 '
-      />
+      <input ref={ref} {...updatedProps} className={classes} />
       {error && <span className='text-red-600'>{error}</span>}
     </div>
   );

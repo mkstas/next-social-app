@@ -6,20 +6,18 @@ interface Props extends HTMLProps<HTMLTextAreaElement> {
 }
 
 const UiTextArea = forwardRef<HTMLTextAreaElement, Props>((props, ref) => {
-  const { label, error, ...textareaProps } = props;
+  const { label, error, ...updatedProps } = props;
+  const classes =
+    'py-2 px-4 bg-white border-2 border-slate-200 focus:border-2 focus:border-blue-600 rounded-2xl placeholder:text-slate-400 outline-none resize-none';
 
   return (
     <div className='grid'>
       {label && (
-        <label htmlFor={textareaProps.id} className='pb-1 font-medium'>
+        <label htmlFor={updatedProps.id} className='pb-1 font-medium'>
           {label}
         </label>
       )}
-      <textarea
-        ref={ref}
-        {...textareaProps}
-        className='py-2 px-4 bg-white border-2 border-slate-200 rounded-2xl placeholder:text-slate-400 outline-none focus:border-2 focus:border-blue-500 resize-none'
-      ></textarea>
+      <textarea ref={ref} {...updatedProps} className={classes}></textarea>
       {error && <span className='text-red-600'>{error}</span>}
     </div>
   );

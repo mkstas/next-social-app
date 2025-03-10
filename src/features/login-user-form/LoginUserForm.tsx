@@ -3,22 +3,22 @@
 import { FC, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { redirect } from 'next/navigation';
-import { UiTextField, UiButton } from '@/shared/ui';
+import { UiTextField, UiButton, UiForm } from '@/shared/ui';
 import { AuthData, useLoginMutation } from '@/shared/stores/queries';
-import { ROUTES } from '@/shared/routes';
+import { ROUTES } from '@/shared/utils/constants';
 
 export const LoginUserForm: FC = () => {
   const { control, formState, handleSubmit } = useForm<AuthData>({ mode: 'onChange' });
-  const [login, { isSuccess }] = useLoginMutation();
+  const [login, { isSuccess: isSuccessLogin }] = useLoginMutation();
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccessLogin) {
       redirect(ROUTES.INDEX);
     }
-  }, [isSuccess]);
+  }, [isSuccessLogin]);
 
   return (
-    <form onSubmit={handleSubmit(formData => login(formData))} className='grid gap-3'>
+    <UiForm onSubmit={handleSubmit(formData => login(formData))}>
       <Controller
         control={control}
         name='email'
@@ -64,6 +64,6 @@ export const LoginUserForm: FC = () => {
         )}
       />
       <UiButton>Войти</UiButton>
-    </form>
+    </UiForm>
   );
 };

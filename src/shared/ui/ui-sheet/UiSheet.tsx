@@ -6,14 +6,7 @@ interface Props extends PropsWithChildren {
 }
 
 export const UiSheet: FC<Props> = ({ children, className }) => {
-  return (
-    <div
-      className={clsx([
-        'p-4 border border-slate-200 bg-white shadow-lg shadow-slate-500/5 rounded-2xl',
-        className,
-      ])}
-    >
-      {children}
-    </div>
-  );
+  const classes = 'p-4 border border-slate-200 bg-white rounded-2xl shadow-lg shadow-slate-500/5';
+
+  return <div className={clsx([classes, className])}>{children}</div>;
 };

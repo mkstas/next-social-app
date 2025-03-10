@@ -8,9 +8,9 @@ interface Props extends PropsWithChildren {
   href: string;
 }
 
-export const UiButtonLink: FC<Props> = ({ children, variant = 'primary', href }) => {
+export const UiButtonLink: FC<Props> = ({ children, className, variant = 'primary', href }) => {
   const classes =
-    'block px-4 bg-blue-600 hover:bg-blue-700 transition-colors text-white font-medium rounded-full cursor-pointer shadow-lg shadow-slate-500/10 outline-blue-500 outline-offset-3';
+    'block px-4 bg-blue-600 hover:bg-blue-700 transition-colors rounded-full text-white font-medium  shadow-lg shadow-slate-500/10 outline-blue-600 outline-offset-3';
 
   const buttonVariant = {
     primary: 'py-2',
@@ -18,7 +18,7 @@ export const UiButtonLink: FC<Props> = ({ children, variant = 'primary', href })
   };
 
   return (
-    <Link href={href} className={clsx([classes, buttonVariant[variant]])}>
+    <Link href={href} className={clsx([classes, buttonVariant[variant], className])}>
       {children}
     </Link>
   );

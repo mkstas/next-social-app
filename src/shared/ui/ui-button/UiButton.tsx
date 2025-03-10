@@ -1,14 +1,15 @@
-import { clsx } from 'clsx';
 import { FC, PropsWithChildren } from 'react';
+import { clsx } from 'clsx';
 
 interface Props extends PropsWithChildren {
+  className?: string;
   variant?: 'primary' | 'small';
-  onClick?: () => void;
+  onClick?: () => unknown;
 }
 
-export const UiButton: FC<Props> = ({ children, variant = 'primary', onClick }) => {
+export const UiButton: FC<Props> = ({ children, className, variant = 'primary', onClick }) => {
   const classes =
-    'block px-4 bg-blue-600 hover:bg-blue-700 transition-colors text-white font-medium rounded-full cursor-pointer shadow-lg shadow-slate-500/10 outline-blue-500 outline-offset-3';
+    'block px-4 bg-blue-600 hover:bg-blue-700 transition-colors rounded-full text-white font-medium  shadow-lg shadow-slate-500/10 outline-blue-600 outline-offset-3 cursor-pointer';
 
   const buttonVariant = {
     primary: 'py-2',
@@ -16,7 +17,7 @@ export const UiButton: FC<Props> = ({ children, variant = 'primary', onClick }) 
   };
 
   return (
-    <button className={clsx([classes, buttonVariant[variant]])} onClick={onClick}>
+    <button className={clsx([classes, buttonVariant[variant], className])} onClick={onClick}>
       {children}
     </button>
   );

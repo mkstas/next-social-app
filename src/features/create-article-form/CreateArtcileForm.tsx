@@ -2,14 +2,14 @@
 
 import { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { UiButton, UiTextArea } from '@/shared/ui';
+import { UiButton, UiForm, UiTextArea } from '@/shared/ui';
 import { CreateArticleData } from '@/shared/stores/queries';
 
 export const CreateArticleForm: FC = () => {
   const { control, formState } = useForm<CreateArticleData>();
 
   return (
-    <form className='grid gap-3'>
+    <UiForm>
       <Controller
         control={control}
         name='content'
@@ -19,16 +19,18 @@ export const CreateArticleForm: FC = () => {
         }}
         render={({ field }) => (
           <UiTextArea
-            id='email'
-            label='Электронная почта'
-            placeholder='example@mail.ru'
+            id='content'
+            label='Содержание'
+            placeholder='Содержание...'
             rows={6}
             error={formState.errors.content?.message}
             {...field}
           />
         )}
       />
-      <UiButton>Создать</UiButton>
-    </form>
+      <div className='justify-self-end'>
+        <UiButton>Создать</UiButton>
+      </div>
+    </UiForm>
   );
 };
