@@ -4,11 +4,13 @@ import { LoginUserForm } from '@/features/login-user-form';
 
 export default function Login() {
   return (
-    <section className='pt-12 pb-6'>
+    <section className='pt-12 pb-6 max-w-96'>
       <UiSheet>
-        <h1 className='mb-4 text-2xl font-bold'>Вход</h1>
-        <LoginUserForm />
-        <UiLink href={ROUTES.REGISTER}>Еще нет аккаунта? Зарегистрироваться</UiLink>
+        <div className='grid gap-4'>
+          <h1 className='text-2xl font-bold'>Вход</h1>
+          <LoginUserForm />
+          <UiLink href={ROUTES.REGISTER}>Еще нет аккаунта? Зарегистрироваться</UiLink>
+        </div>
       </UiSheet>
     </section>
   );

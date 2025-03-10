@@ -8,7 +8,7 @@ interface Props extends PropsWithChildren {
 
 export const UiButton: FC<Props> = ({ children, variant = 'primary', onClick }) => {
   const classes =
-    'block px-4 bg-blue-600 hover:bg-blue-700 transition-colors text-white font-medium rounded-full cursor-pointer shadow-lg shadow-slate-500/10';
+    'block px-4 bg-blue-600 hover:bg-blue-700 transition-colors text-white font-medium rounded-full cursor-pointer shadow-lg shadow-slate-500/10 outline-blue-500 outline-offset-3';
 
   const buttonVariant = {
     primary: 'py-2',

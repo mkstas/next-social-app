@@ -18,7 +18,7 @@ const UiTextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
       <input
         ref={ref}
         {...inputProps}
-        className='py-2 px-4 bg-slate-100 border border-slate-200 rounded-full placeholder:text-slate-400'
+        className='py-2 px-4 bg-white border-2 border-slate-200 rounded-full placeholder:text-slate-400 outline-none focus:border-2 focus:border-blue-500 '
       />
       {error && <span className='text-red-600'>{error}</span>}
     </div>

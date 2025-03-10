@@ -7,7 +7,7 @@ interface Props extends PropsWithChildren {
 
 export const UiLink: FC<Props> = ({ children, href }) => {
   return (
-    <Link href={href} className='text-blue-600 hover:underline'>
+    <Link href={href} className='text-blue-600 hover:underline outline-blue-500 outline-offset-3'>
       {children}
     </Link>
   );

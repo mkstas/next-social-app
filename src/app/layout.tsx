@@ -21,7 +21,7 @@ export default function RootLayot({ children }: PropsWithChildren) {
         <Providers>
           <UiContainer>
             <TheHeader />
-            <main>{children}</main>
+            <main className='py-8'>{children}</main>
           </UiContainer>
         </Providers>
       </body>
