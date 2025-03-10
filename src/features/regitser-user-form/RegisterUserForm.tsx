@@ -1,20 +1,24 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { RegisterData, useRegisterMutation } from '@/shared/stores/queries';
+import { redirect } from 'next/navigation';
 import { UiTextField, UiButton } from '@/shared/ui';
+import { RegisterData, useRegisterMutation } from '@/shared/stores/queries';
+import { ROUTES } from '@/shared/routes';
 
 export const RegisterUserForm: FC = () => {
   const { control, formState, handleSubmit } = useForm<RegisterData>({ mode: 'onChange' });
-  const [register] = useRegisterMutation();
+  const [register, { isSuccess }] = useRegisterMutation();
 
-  const onSubmitForm = async (formData: RegisterData) => {
-    await register(formData);
-  };
+  useEffect(() => {
+    if (isSuccess) {
+      redirect(ROUTES.INDEX);
+    }
+  }, [isSuccess]);
 
   return (
-    <form onSubmit={handleSubmit(formData => onSubmitForm(formData))} className='grid gap-3'>
+    <form onSubmit={handleSubmit(formData => register(formData))} className='grid gap-3'>
       <Controller
         control={control}
         name='userName'

@@ -1,16 +1,16 @@
 'use client';
 
 import { FC } from 'react';
-import { useFindUserDataQuery, useLogoutMutation, userApi } from '@/shared/stores/queries';
 import { UiButton, UiButtonLink } from '@/shared/ui';
-import { ROUTES } from '@/shared/routes';
+import { useFindUserDataQuery, useLogoutMutation, userApi } from '@/shared/stores/queries';
 import { useTypedDispatch } from '@/shared/stores';
+import { ROUTES } from '@/shared/routes';
 
 export const UserInfoLogin: FC = () => {
   const dispatch = useTypedDispatch();
 
-  const { isLoading, data } = useFindUserDataQuery();
-  const [logout, {}] = useLogoutMutation();
+  const { isLoading: isLoadingUser, data } = useFindUserDataQuery();
+  const [logout, { isLoading: isLoadingLogout }] = useLogoutMutation();
 
   const onClickButton = async () => {
     await logout();
@@ -19,7 +19,7 @@ export const UserInfoLogin: FC = () => {
 
   return (
     <div className='flex items-center gap-2'>
-      {isLoading ? (
+      {isLoadingUser && isLoadingLogout ? (
         <div className='w-40 h-7 bg-slate-200 animate-pulse rounded-full'></div>
       ) : data?.userName ? (
         <>

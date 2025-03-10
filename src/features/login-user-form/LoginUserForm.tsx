@@ -1,20 +1,24 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { AuthData, useLoginMutation } from '@/shared/stores/queries';
+import { redirect } from 'next/navigation';
 import { UiTextField, UiButton } from '@/shared/ui';
+import { AuthData, useLoginMutation } from '@/shared/stores/queries';
+import { ROUTES } from '@/shared/routes';
 
 export const LoginUserForm: FC = () => {
   const { control, formState, handleSubmit } = useForm<AuthData>({ mode: 'onChange' });
-  const [login, {}] = useLoginMutation();
+  const [login, { isSuccess }] = useLoginMutation();
 
-  const onSubmitForm = async (formData: AuthData) => {
-    await login(formData);
-  };
+  useEffect(() => {
+    if (isSuccess) {
+      redirect(ROUTES.INDEX);
+    }
+  }, [isSuccess]);
 
   return (
-    <form onSubmit={handleSubmit(formData => onSubmitForm(formData))} className='grid gap-3'>
+    <form onSubmit={handleSubmit(formData => login(formData))} className='grid gap-3'>
       <Controller
         control={control}
         name='email'
