@@ -13,11 +13,11 @@ export const authApi = api.injectEndpoints({
   endpoints: builder => ({
     register: builder.mutation<{ success: number }, RegisterData>({
       query: body => ({ url: '/auth/register', method: 'POST', body }),
-      invalidatesTags: ['userData'],
+      invalidatesTags: ['user'],
     }),
     login: builder.mutation<{ success: number }, AuthData>({
       query: body => ({ url: '/auth/login', method: 'POST', body }),
-      invalidatesTags: ['userData'],
+      invalidatesTags: ['user'],
     }),
     logout: builder.mutation<{ success: number }, void>({
       query: () => ({ url: '/auth/logout', method: 'DELETE' }),

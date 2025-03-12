@@ -8,12 +8,12 @@ export interface User {
 
 export const userApi = api.injectEndpoints({
   endpoints: builder => ({
-    findUserData: builder.query<User, void>({
+    findUser: builder.query<User, void>({
       query: () => '/users',
-      providesTags: ['userData'],
+      providesTags: ['user'],
     }),
   }),
   overrideExisting: true,
 });
 
-export const { useFindUserDataQuery } = userApi;
+export const { useFindUserQuery } = userApi;

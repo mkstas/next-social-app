@@ -3,12 +3,12 @@
 import { FC } from 'react';
 import { UiButton, UiButtonLink } from '@/shared/ui';
 import { useTypedDispatch } from '@/shared/stores';
-import { useFindUserDataQuery, useLogoutMutation, userApi } from '@/shared/stores/queries';
+import { useFindUserQuery, useLogoutMutation, userApi } from '@/shared/stores/queries';
 import { ROUTES } from '@/shared/utils/constants';
 
 export const AuthUserActions: FC = () => {
   const dispatch = useTypedDispatch();
-  const { isLoading: isLoadingUser, data } = useFindUserDataQuery();
+  const { isLoading: isLoadingUser, data } = useFindUserQuery();
   const [logout, {}] = useLogoutMutation();
 
   const onClickButton = async () => {
