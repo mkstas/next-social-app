@@ -1,8 +1,8 @@
 'use client';
 
 import { useFindArticlesQuery, useFindUserQuery } from '@/shared/stores/queries';
-import { TheArticle } from '@/entities/the-article';
 import { CreateArticleLink } from '@/features/create-article-link';
+import { TheArticle } from '@/widgets/the-article';
 
 export default function Root() {
   const { data: user, isLoading: isLoadingUser } = useFindUserQuery();

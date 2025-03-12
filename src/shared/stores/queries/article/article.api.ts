@@ -6,11 +6,18 @@ interface Like {
   articleId: number;
 }
 
+interface LikeArticle {
+  articleId: number;
+}
+
 interface Comment {
   commentId: number;
-  userId: number;
   articleId: number;
   message: string;
+  user: {
+    userId: number;
+    userName: string;
+  };
 }
 
 interface User {
@@ -43,8 +50,13 @@ export const articleApi = api.injectEndpoints({
       query: body => ({ url: '/articles', method: 'POST', body }),
       invalidatesTags: ['articles'],
     }),
+    likeArticle: builder.mutation<Like, LikeArticle>({
+      query: body => ({ url: `/articles/like/${body.articleId}`, method: 'POST' }),
+      invalidatesTags: ['articles'],
+    }),
   }),
   overrideExisting: true,
 });
 
-export const { useFindArticlesQuery, useCreateArticleMutation } = articleApi;
+export const { useFindArticlesQuery, useCreateArticleMutation, useLikeArticleMutation } =
+  articleApi;
