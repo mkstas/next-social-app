@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import { api } from './queries/api';
+import { configureStore } from '@reduxjs/toolkit';
+import { api } from '@/shared/utils/api';
 
 export const store = configureStore({
   reducer: {

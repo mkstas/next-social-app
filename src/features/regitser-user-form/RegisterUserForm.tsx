@@ -4,18 +4,18 @@ import { FC, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { redirect } from 'next/navigation';
 import { UiTextField, UiButton, UiForm } from '@/shared/ui';
-import { RegisterData, useRegisterMutation } from '@/shared/stores/queries';
 import { ROUTES } from '@/shared/utils/constants';
+import { RegisterData, useRegisterUserMutation } from '@/entities/users';
 
 export const RegisterUserForm: FC = () => {
   const { control, formState, handleSubmit } = useForm<RegisterData>({ mode: 'onChange' });
-  const [register, { isSuccess: isSuccessRegister }] = useRegisterMutation();
+  const [register, { isSuccess: isRegisterSuccess }] = useRegisterUserMutation();
 
   useEffect(() => {
-    if (isSuccessRegister) {
+    if (isRegisterSuccess) {
       redirect(ROUTES.INDEX);
     }
-  }, [isSuccessRegister]);
+  }, [isRegisterSuccess]);
 
   return (
     <UiForm onSubmit={handleSubmit(formData => register(formData))}>

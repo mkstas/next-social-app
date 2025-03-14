@@ -26,5 +26,5 @@ const baseQueryRefresh = async (
 export const api = createApi({
   baseQuery: baseQueryRefresh,
   endpoints: () => ({}),
-  tagTypes: ['user', 'articles'],
+  tagTypes: ['users', 'articles'],
 });

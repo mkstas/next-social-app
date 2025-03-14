@@ -4,21 +4,21 @@ import { FC, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { redirect } from 'next/navigation';
 import { UiTextField, UiButton, UiForm } from '@/shared/ui';
-import { AuthData, useLoginMutation } from '@/shared/stores/queries';
 import { ROUTES } from '@/shared/utils/constants';
+import { AuthData, useLoginUserMutation } from '@/entities/users';
 
 export const LoginUserForm: FC = () => {
   const { control, formState, handleSubmit } = useForm<AuthData>({ mode: 'onChange' });
-  const [login, { isSuccess: isSuccessLogin }] = useLoginMutation();
+  const [loginUser, { isSuccess: isLoginSuccess }] = useLoginUserMutation();
 
   useEffect(() => {
-    if (isSuccessLogin) {
+    if (isLoginSuccess) {
       redirect(ROUTES.INDEX);
     }
-  }, [isSuccessLogin]);
+  }, [isLoginSuccess]);
 
   return (
-    <UiForm onSubmit={handleSubmit(formData => login(formData))}>
+    <UiForm onSubmit={handleSubmit(formData => loginUser(formData))}>
       <Controller
         control={control}
         name='email'

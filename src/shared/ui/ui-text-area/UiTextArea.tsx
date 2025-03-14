@@ -8,7 +8,7 @@ interface Props extends HTMLProps<HTMLTextAreaElement> {
 const UiTextArea = forwardRef<HTMLTextAreaElement, Props>((props, ref) => {
   const { label, error, ...updatedProps } = props;
   const classes =
-    'py-2 px-4 bg-white border-2 border-slate-200 focus:border-2 focus:border-blue-600 rounded-2xl placeholder:text-slate-400 outline-none resize-none';
+    'py-2 px-4 bg-white border border-slate-200 focus:border-blue-600 focus:ring focus:ring-blue-600 rounded-2xl placeholder:text-slate-400 outline-none resize-none';
 
   return (
     <div className='grid'>

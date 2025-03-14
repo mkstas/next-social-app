@@ -2,10 +2,10 @@
 
 import { FC, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { UiButton, UiForm, UiTextArea, UiTextField } from '@/shared/ui';
-import { CreateArticleData, useCreateArticleMutation } from '@/shared/stores/queries';
 import { redirect } from 'next/navigation';
+import { UiButton, UiForm, UiTextArea, UiTextField } from '@/shared/ui';
 import { ROUTES } from '@/shared/utils/constants';
+import { CreateArticleData, useCreateArticleMutation } from '@/entities/articles';
 
 export const CreateArticleForm: FC = () => {
   const { control, formState, handleSubmit } = useForm<CreateArticleData>();

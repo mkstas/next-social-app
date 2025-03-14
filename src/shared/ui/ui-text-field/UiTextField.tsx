@@ -8,7 +8,7 @@ interface Props extends HTMLProps<HTMLInputElement> {
 const UiTextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const { label, error, ...updatedProps } = props;
   const classes =
-    'py-2 px-4 bg-white border-2 border-slate-200 focus:border-2 focus:border-blue-600 rounded-2xl placeholder:text-slate-400 outline-none';
+    'py-2 px-4 bg-white border border-slate-200 focus:border-blue-600 focus:ring focus:ring-blue-600 rounded-2xl placeholder:text-slate-400 outline-none';
 
   return (
     <div className='grid'>

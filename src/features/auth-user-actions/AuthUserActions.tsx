@@ -1,31 +1,33 @@
 'use client';
 
 import { FC } from 'react';
-import { UiButton, UiButtonLink } from '@/shared/ui';
-import { useTypedDispatch } from '@/shared/stores';
-import { useFindUserQuery, useLogoutMutation, userApi } from '@/shared/stores/queries';
+import { UiButton, UiButtonLink, UiSkeleton } from '@/shared/ui';
+import { useTypedDispatch } from '@/shared/utils/stores';
 import { ROUTES } from '@/shared/utils/constants';
+import { useFindUserQuery, useLogoutUserMutation, usersApi } from '@/entities/users';
 
 export const AuthUserActions: FC = () => {
   const dispatch = useTypedDispatch();
-  const { isLoading: isLoadingUser, data } = useFindUserQuery();
-  const [logout, {}] = useLogoutMutation();
+  const { isLoading: isLoadingUser, currentData: userData } = useFindUserQuery();
+  const [logoutUser, {}] = useLogoutUserMutation();
 
-  const onClickButton = async () => {
-    await logout();
-    dispatch(userApi.util.resetApiState());
+  const onClickLogout = async () => {
+    await logoutUser();
+    dispatch(
+      usersApi.util.updateQueryData('findUser', undefined, () => ({ userId: 0, userName: '' })),
+    );
   };
 
   if (isLoadingUser) {
-    return <div className='w-40 h-7 bg-slate-200 rounded-full animate-pulse'></div>;
+    return <UiSkeleton className='w-40 h-7' />;
   }
 
   return (
     <div className='flex items-center gap-2'>
-      {data ? (
+      {userData?.userId ? (
         <>
-          <span className='text-sm font-medium'>{data.userName}</span>
-          <UiButton onClick={onClickButton} variant='small'>
+          <span className='text-sm font-medium'>{userData.userName}</span>
+          <UiButton onClick={onClickLogout} variant='small'>
             Выйти
           </UiButton>
         </>

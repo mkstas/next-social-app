@@ -5,5 +5,6 @@ export * from './ui-form';
 export * from './ui-heading';
 export * from './ui-link';
 export * from './ui-sheet';
+export * from './ui-skeleton';
 export * from './ui-text-area';
 export * from './ui-text-field';
